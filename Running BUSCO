@@ -1,0 +1,21 @@
+#!/bin/bash
+#SBATCH --time=12:00:00
+#SBATCH --account=def-dogfish
+#SBATCH --mem=0
+#SBATCH --mail-user=edward32@myumanitoba.ca
+#SBATCH --mail-type=ALL
+#SBATCH --cpus-per-task=40
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --propagate=STACK
+
+cd /home/edward32
+
+module load StdEnv/2020 gcc/9.3.0 python/3.10 augustus/3.5.0 hmmer/3.3.2 blast+/2.13.0 metaeuk/6 prodigal/2.6.3 r/4.3.1 bbmap/38.86
+
+virtualenv /home/$USER/busco_env
+source ~/busco_env/bin/activate
+
+cd /home/edward32/scratch/sturgeon_OE
+
+busco --offline --in /home/edward32/scratch/sturgeon_OE/trinity_outputs.Trinity.fasta --cpu 2 --out BUSCO --lineage_dataset actinopterygii_odb10 --mode transcriptome -f
