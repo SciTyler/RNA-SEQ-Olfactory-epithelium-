@@ -75,7 +75,7 @@ y
 #Take a look at a PCA
 MDS_full <- plotMDS(y, top = nrow(y$counts), labels = metadata$file_ID, dim.plot =c(2,3))
 
-#where you get the variance from P1 and P2 for plot
+# variance from P1 and P2 for plot
 MDS_full$var.explained
 
 MDS_data_tibble <- tibble(x_coord = MDS_full$x, y_coord = MDS_full$y, Time = metadata$time, State = metadata$state)
@@ -113,7 +113,7 @@ ggsave(filename = "Dimensions_PCA.pdf", plot = PCA_plot, dpi = 3000, scale = 1.3
 #installing fishualize package
 install.packages("fishualize")
 
-#quality control estimate dispersion CPM logs per millions by you dont want dispersion by CPM (want to be relatively flat)
+#quality control estimate dispersion CPM logs per millions (want to be relatively flat)
 plotBCV(y)
 
 #fit the GLM using the edgeR data and the design
